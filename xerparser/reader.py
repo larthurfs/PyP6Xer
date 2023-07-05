@@ -47,6 +47,14 @@ class Reader:
     current_table = ''
     current_headers = []
 
+    def replace_comma_with_dot(self, params):
+        for key, value in params.items():
+            # Check if the value is a string with commas
+            if isinstance(value, str) and "," in value:
+                # Replace all commas with dots
+                params[key] = value.replace(",", ".")
+        return params
+    
     def write(self, filename=None):
         if filename is None:
             raise Exception("You have to provide the filename")
@@ -63,63 +71,63 @@ class Reader:
 
         """
         if object_type.strip() == "CURRTYPE":
-            self._currencies.add(params)
+            self._currencies.add(self.replace_comma_with_dot(params))
         elif object_type.strip() == "ROLES":
-            self._roles.add(params)
+            self._roles.add(self.replace_comma_with_dot(params))
         elif object_type.strip() == "ACCOUNT":
-            self._accounts.add(params)
+            self._accounts.add(self.replace_comma_with_dot(params))
         elif object_type.strip() == "ROLERATE":
-            self._rolerates.add(params)
+            self._rolerates.add(self.replace_comma_with_dot(params))
         elif object_type.strip() == "OBS":
-            self._obss.add(params)
+            self._obss.add(self.replace_comma_with_dot(params))
         elif object_type.strip() == "RCATTYPE":
-            self._rcattypes.add(params)
+            self._rcattypes.add(self.replace_comma_with_dot(params))
         elif object_type.strip() == "UDFTYPE":
-            self._udftypes.add(params)
+            self._udftypes.add(self.replace_comma_with_dot(params))
         elif object_type.strip() == "RCATVAL":
-            self._rcatvals.add(params)
+            self._rcatvals.add(self.replace_comma_with_dot(params))
         elif object_type.strip() == "PROJECT":
-            self._projects.add(params, self._data)
+            self._projects.add(params), self._data)
         elif object_type.strip() == "CALENDAR":
-            self._calendars.add(params)
+            self._calendars.add(self.replace_comma_with_dot(params))
         elif object_type.strip() == "SCHEDOPTIONS":
-            self._schedoptions.add(params)
+            self._schedoptions.add(self.replace_comma_with_dot(params))
         elif object_type.strip() == "PROJWBS":
-            self._wbss.add(params, self._data)
+            self._wbss.add(self.replace_comma_with_dot(params), self._data)
         elif object_type.strip() == "RSRC":
-            self._resources.add(params)
+            self._resources.add(self.replace_comma_with_dot(params))
         elif object_type.strip() == "RSRCCURVDATA":
-            self._rsrcurves.add(params)
+            self._rsrcurves.add(self.replace_comma_with_dot(params))
         elif object_type.strip() == "ACTVTYPE":
-            self._acttypes.add(params)
+            self._acttypes.add(self.replace_comma_with_dot(params))
         elif object_type.strip() == "PCATTYPE":
-            self._pcattypes.add(params)
+            self._pcattypes.add(self.replace_comma_with_dot(params))
         elif object_type.strip() == "PROJPCAT":
-            self._projpcats.add(params)
+            self._projpcats.add(self.replace_comma_with_dot(params))
         elif object_type.strip() == "PCATVAL":
-            self._pcatvals.add(params)
+            self._pcatvals.add(self.replace_comma_with_dot(params))
         elif object_type.strip() == "RSRCRATE":
-            self._rsrcrates.add(params)
+            self._rsrcrates.add(self.replace_comma_with_dot(params))
         elif object_type.strip() == "RSRCRCAT":
-            self._rsrccats.add(params)
+            self._rsrccats.add(self.replace_comma_with_dot(params))
         elif object_type.strip() == "TASK":
-            self._tasks.add(params, self._data)
+            self._tasks.add(self.replace_comma_with_dot(params), self._data)
         elif object_type.strip() == "ACTVCODE":
-            self._actvcodes.add(params)
+            self._actvcodes.add(self.replace_comma_with_dot(params))
         elif object_type.strip() == "TASKPRED":
-            self._predecessors.add(params)
+            self._predecessors.add(self.replace_comma_with_dot(params))
         elif object_type.strip() == "TASKRSRC":
-            self._activityresources.add(params, self._data)
+            self._activityresources.add(self.replace_comma_with_dot(params, self._data)
         elif object_type.strip() == "TASKPROC":
-            self._taskprocs.add(params)
+            self._taskprocs.add(self.replace_comma_with_dot(params))
         elif object_type.strip() == "TASKACTV":
-            self._activitycodes.add(params, self._data)
+            self._activitycodes.add(self.replace_comma_with_dot(params), self._data)
         elif object_type.strip() == "UDFVALUE":
-            self._udfvalues.add(params)
+            self._udfvalues.add(self.replace_comma_with_dot(params))
         elif object_type.strip() == "FINTMPL":
-            self._fintmpls.add(params)
+            self._fintmpls.add(self.replace_comma_with_dot(params))
         elif object_type.strip() == "NONWORK":
-            self._nonworks.add(params)
+            self._nonworks.add(self.replace_comma_with_dot(params))
 
     def summary(self):
         print('Number of activities: ', self.tasks.count)
